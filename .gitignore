@@ -1,3 +1,37 @@
-.env
+# Entorno virtual
+.venv/
+venv/
+env/
+
 .idea
-.venv
+.env
+
+# Database 
+*.sqlite3
+*.db
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Django
+*.log
+local_settings.py
+
+# PyCharm
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archivos de medios (subidos por usuarios)
+/media/
+!/media/.gitkeep
+
+# Static files recolectados
+/staticfiles/
