@@ -51,4 +51,17 @@ class CategoryView(APIView):
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
         
-
+class ArticleView(APIView):
+    def get(self, request, pk=None):
+        if pk:
+            try:
+                article = Article.objects.get(pk=pk)
+                serializer = ArticleSerializer(article)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Article.DoesNotExist:
+                return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
+        else:
+            article = Article.objects.all()
+            serializer = ArticleSerializer(article, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
