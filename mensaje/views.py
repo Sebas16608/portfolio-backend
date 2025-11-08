@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Mensaje
+from .serializers import MensajeSerializer
 
-# Create your views here.
+def notexist():
+    return {"error": "Datos no encontrados"}
+
+class MensajeView(APIView):
+    def get(self, request, pk=None):
+        if pk:
+            try:
+                mensaje = Mensaje.objects.get(pk=pk)
+                serializer = MensajeSerializer(mensaje)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Mensaje.DoesNotExist:
+                return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
+        else:
+            mensaje = Mensaje.objects.all()
+            serializer = MensajeSerializer(mensaje, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
