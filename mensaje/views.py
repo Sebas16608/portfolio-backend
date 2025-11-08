@@ -28,3 +28,12 @@ class MensajeView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    def delete(self, request, pk):
+        try:
+            mensaje = Mensaje.objects.get(pk=pk)
+        except Mensaje.DoesNotExist:
+            return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
+
+        mensaje.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
