@@ -35,6 +35,7 @@ Thumbs.db
 # Archivos de medios (subidos por usuarios)
 /media/
 !/media/.gitkeep
+*media
 
 # Static files recolectados
 /staticfiles/
