@@ -7,7 +7,7 @@ from .models import Category, Article
 
 # funcion notexits para el 404
 def notexist():
-    return {"erro": "Los datos no fueron encontrados"}
+    return {"error": "Los datos no fueron encontrados"}
 
 class CategoryView(APIView):
     def get(self, request, pk=None):

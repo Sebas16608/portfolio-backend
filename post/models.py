@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to="")
+    image = models.ImageField(upload_to="category-media/")
     slug = models.SlugField(unique=True, max_length=255)
     featured = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -20,12 +20,13 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     introduccion = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, max_length=255)
-    image = models.ImageField(upload_to="")
+    image = models.ImageField(upload_to="article-media/")
     body = models.TextField()
     github = models.URLField(max_length=255)
     demo = models.URLField(max_length=255, blank=True, null=True)
     categoria = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True)
+    featured = models.BooleanField(default=True)
     update = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
 
