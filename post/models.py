@@ -22,13 +22,18 @@ class Article(models.Model):
     slug = models.SlugField(unique=True, max_length=255)
     image = models.ImageField(upload_to="article-media/")
     body = models.TextField()
+    ESTADO = [
+        ("PRODUCCION", "Producción"),
+        ("DESARROLLO", "Desarrollo"),
+        ("BAJA", "Dado de baja")
+    ]
+    estado = models.CharField(max_length=24, choices=ESTADO, default="Desarrollo")
     github = models.URLField(max_length=255)
     demo = models.URLField(max_length=255, blank=True, null=True)
     categoria = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True)
     featured = models.BooleanField(default=True)
     update = models.DateTimeField(auto_now=True)
-    status = models.BooleanField(default=True)
 
     def get_absolute_url(self):
         return  reversed('post')
