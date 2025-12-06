@@ -1,7 +1,14 @@
+import socket
+orig_getaddrinfo = socket.getaddrinfo
+
+def force_ipv4(*args, **kwargs):
+    return [info for info in orig_getaddrinfo(*args, **kwargs) if info[0] == socket.AF_INET]
+
+socket.getaddrinfo = force_ipv4
+
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-import dj_database_url
 
 # Cargar variables del .env
 load_dotenv()
@@ -63,13 +70,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Portfolio.wsgi.application'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # -------------------------
 # DATABASE (Supabase)
 # -------------------------
 DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+    }
 }
+
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
