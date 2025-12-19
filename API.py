@@ -12,13 +12,13 @@ class SuperAPIView(APIView):
     def get(self, request, pk=None):
         if pk:
             try:
-                obj = self.model.object.get(pk=pk)
+                obj = self.model.objects.get(pk=pk)
                 serializer = self.serializer(obj)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except self.model.DoesNotExist:
                 return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
         else:
-            obj = self.model.object.all()
+            obj = self.model.objects.all()
             serializer = self.serializer(obj, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         
@@ -31,7 +31,7 @@ class SuperAPIView(APIView):
 
     def put(self, request, pk):
         try:
-            obj = self.model.object(pk=pk)
+            obj = self.model.objects.get(pk=pk)
         except self.model.DoesNotExist:
             return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
         
@@ -43,7 +43,7 @@ class SuperAPIView(APIView):
 
     def delete(self, request, pk):
         try:
-            obj = self.model.object.get(pk=pk)
+            obj = self.model.objects.get(pk=pk)
         except self.model.DoesNotExist:
             return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
         
