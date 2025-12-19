@@ -40,4 +40,13 @@ class SuperAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        try:
+            obj = self.model.object.get(pk=pk)
+        except self.model.DoesNotExist:
+            return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
+        
+        obj.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
