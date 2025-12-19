@@ -23,8 +23,21 @@ class SuperAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         
     def post(self, request):
-        serializer = serializer(data=request.data)
+        serializer = self.serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        try:
+            obj = self.model.object(pk=pk)
+        except self.model.DoesNotExist:
+            return Response(notexist(), status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = self.serializer(obj, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+    
