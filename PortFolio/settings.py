@@ -32,8 +32,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
-
+ALLOWED_HOSTS = ["portafolio-backend-2oq7.onrender.com"]
 # Application definition
 
 INSTALLED_APPS = [
