@@ -6,23 +6,23 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Dependencias del sistema (psycopg2)
+# Dependencias del sistema para psycopg2
 RUN apt-get update \
     && apt-get install -y build-essential libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Dependencias Python
+# Copiar y instalar dependencias Python
 COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Código
+# Copiar código
 COPY . .
 
-# Static files
-RUN python manage.py collectstatic --noinput
+# Crear carpeta static si no existe
+RUN mkdir -p /app/static
 
-# Puerto (Render usa 8000)
-EXPOSE 8000
-
-# Run
-CMD ["gunicorn", "PortFolio.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Collectstatic **usando entorno de Render** (lee variables al run)
+# Se recomienda hacerlo al iniciar el contenedor
+CMD python manage.py collectstatic --noinput && \
+    gunicorn PortFolio.wsgi:application --bind 0.0.0.0:8000
