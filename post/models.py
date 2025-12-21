@@ -20,6 +20,8 @@ class Article(models.Model):
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to="media/")
     content = models.TextField()
+    github = models.URLField(blank=True, null=True)
+    demo = models.URLField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name = "article")
     featured = models.BooleanField(default=False)
 
