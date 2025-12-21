@@ -7,6 +7,6 @@ class CategoryView(SuperAPIView):
     model = Category
     serializer = CategorySerializer
 
-class AricleView(SuperAPIView):
+class ArticleView(SuperAPIView):
     model = Article
     serializer = ArticleSerializer
