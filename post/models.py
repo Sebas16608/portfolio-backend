@@ -27,7 +27,7 @@ class Article(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADOS, default="DESARROLLO") 
     github = models.URLField(blank=True, null=True)
     demo = models.URLField(blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name = "article")
+    category = models.ManyToManyField(Category, on_delete=models.CASCADE, related_name = "article")
     featured = models.BooleanField(default=False)
 
     class Meta:
