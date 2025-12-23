@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 def notexist():
     return {"error": "Los datos no fueron encontrados"}
@@ -21,7 +22,8 @@ class SuperAPIView(APIView):
             obj = self.model.objects.all()
             serializer = self.serializer(obj, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
+    
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         serializer = self.serializer(data=request.data)
         if serializer.is_valid():
