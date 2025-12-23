@@ -8,6 +8,7 @@ class Category(models.Model):
     featured = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ["id"]
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
@@ -31,6 +32,7 @@ class Article(models.Model):
     featured = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ["id"]
         verbose_name = "Article"
         verbose_name_plural = "Articles"
 
