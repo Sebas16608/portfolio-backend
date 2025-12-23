@@ -10,6 +10,11 @@ class SuperAPIView(APIView):
     model = None
     serializer = None
 
+    # def get_permissions(self):
+    #     if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE']:
+    #         return [IsAuthenticated()]
+    #     return []
+    
     def get(self, request, pk=None):
         if pk:
             try:
