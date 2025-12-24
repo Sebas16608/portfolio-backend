@@ -144,3 +144,18 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # URL base para servir los archivos multimedia.
 MEDIA_URL = 'media/'
+
+# Configuracion de CORS
+
+# Pruebas
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+CORS_ALLOW_METHODS = [
+    "GET",
+]
+
+CORS_ALLOW_HEADERS = [
+    "authorization",
+    "content-type",
+]
