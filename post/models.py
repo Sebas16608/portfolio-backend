@@ -4,7 +4,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to="")
+    image = models.URLField()
     featured = models.BooleanField(default=False)
 
     class Meta:
@@ -19,7 +19,7 @@ class Article(models.Model):
     name = models.CharField(max_length=255)
     introduccion = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to="")
+    image = models.URLField()
     content = models.TextField()
     ESTADOS = [
         ("PRODUCCION", "Producción"),
