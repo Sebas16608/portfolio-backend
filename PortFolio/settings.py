@@ -139,11 +139,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Ruta absoluta donde se guardarán los archivos subidos por los usuarios.
-MEDIA_ROOT = BASE_DIR / 'media'
-
-# URL base para servir los archivos multimedia.
-MEDIA_URL = 'media/'
 
 # Configuracion de CORS
 
