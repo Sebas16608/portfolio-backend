@@ -23,7 +23,8 @@ class Article(models.Model):
     content = models.TextField()
     ESTADOS = [
         ("PRODUCCION", "Producción"),
-        ("DESARROLLO", "Desarrollo")
+        ("DESARROLLO", "Desarrollo"),
+        ("ACTIVO", "Activo")
     ]
     estado = models.CharField(max_length=20, choices=ESTADOS, default="DESARROLLO") 
     github = models.URLField(blank=True, null=True)
